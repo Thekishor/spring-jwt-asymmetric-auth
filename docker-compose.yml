@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: spring_security_jwt_rsa
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      PGDATA: /data/postgres
+      POSTGRES_DB: DB_NAME
+    volumes:
+      - postgres:/data/postgres
+    restart: unless-stopped
+volumes:
+  postgres:
