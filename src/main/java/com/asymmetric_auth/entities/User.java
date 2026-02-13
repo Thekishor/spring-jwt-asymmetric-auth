@@ -23,48 +23,48 @@ public class User {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @Column(name = "FIRST_NAME", nullable = false)
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "LAST_NAME", nullable = false)
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "EMAIL", nullable = false, unique = true)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "PHONE_NUMBER", nullable = false, unique = true)
+    @Column(name = "phone_number", nullable = false, unique = true)
     private String phoneNumber;
 
-    @Column(name = "PASSWORD", nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "DATE_OF_BIRTH")
+    @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 
-    @Column(name = "IS_ENABLED")
+    @Column(name = "is_enabled")
     private boolean enabled;
 
-    @Column(name = "IS_ACCOUNT_LOCKED")
+    @Column(name = "is_account_locked")
     private boolean locked;
 
-    @Column(name = "IS_CREDENTIAL_EXPIRED")
+    @Column(name = "is_credential_expired")
     private boolean expired;
 
-    @Column(name = "IS_EMAIL_VERIFIED")
+    @Column(name = "is_email_verified")
     private boolean emailVerified;
 
-    @Column(name = "IS_PHONE_VERIFIED")
+    @Column(name = "is_phone_verified")
     private boolean phoneVerified;
 
-    @Column(name = "CREDENTIALS_EXPIRED")
+    @Column(name = "credentials_expired")
     private boolean credentialsExpired;
 
     @CreatedDate
-    @Column(name = "CREATED_DATE", updatable = false, nullable = false)
+    @Column(name = "created_date", updatable = false, nullable = false)
     private LocalDateTime createdDated;
 
     @LastModifiedDate
-    @Column(name = "LAST_MODIFIED_DATE", insertable = false)
+    @Column(name = "last_modified_date", insertable = false)
     private LocalDateTime lastModifiedDate;
 
     @ManyToMany(
@@ -72,12 +72,12 @@ public class User {
             fetch = FetchType.EAGER
     )
     @JoinTable(
-            name = "USERS_ROLES",
+            name = "users_roles",
             joinColumns = {
-                    @JoinColumn(name = "USER_ID")
+                    @JoinColumn(name = "user_id")
             },
             inverseJoinColumns = {
-                    @JoinColumn(name = "ROLE_ID")
+                    @JoinColumn(name = "role_id")
             }
     )
     private List<Role> roles;

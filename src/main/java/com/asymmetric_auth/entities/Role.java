@@ -11,7 +11,7 @@ import lombok.experimental.SuperBuilder;
 import java.util.List;
 
 @Entity
-@Table(name = "ROLES")
+@Table(name = "roles")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,7 +19,7 @@ import java.util.List;
 @SuperBuilder
 public class Role extends BaseEntity {
 
-    @Column(name = "NAME", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
     @ManyToMany(mappedBy = "roles")
