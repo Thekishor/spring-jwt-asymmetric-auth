@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -65,7 +66,7 @@ public class UserController {
         this.userService.deleteAccount(getUserId(authentication));
     }
 
-    private String getUserId(Authentication authentication) {
+    private UUID getUserId(Authentication authentication) {
         return ((User) Objects.requireNonNull(authentication.getPrincipal())).getId();
     }
 }

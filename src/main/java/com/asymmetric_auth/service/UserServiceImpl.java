@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -22,7 +24,7 @@ public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
 
     @Override
-    public void updateProfileInfo(final ProfileUpdateRequest request, final String userId) {
+    public void updateProfileInfo(final ProfileUpdateRequest request, final UUID userId) {
         final User user = this.userRepository.findById(userId)
                 .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND, userId));
         this.userMapper.mergerUserInfo(user, request);
@@ -30,7 +32,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void changePassword(final ChangedPasswordRequest request, final String userId) {
+    public void changePassword(final ChangedPasswordRequest request, final UUID userId) {
         if (!request.getNewPassword().equals(request.getConfirmNewPassword())) {
             throw new BusinessException(ErrorCode.CHANGE_PASSWORD_MISMATCH);
         }
@@ -52,7 +54,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deactivateAccount(final String userId) {
+    public void deactivateAccount(final UUID userId) {
         final User user = this.userRepository.findById(userId)
                 .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND, userId));
 
@@ -64,7 +66,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void reactivatedAccount(final String userId) {
+    public void reactivatedAccount(final UUID userId) {
         final User user = this.userRepository.findById(userId)
                 .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND, userId));
 
@@ -76,7 +78,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteAccount(final String userId) {
+    public void deleteAccount(final UUID userId) {
         //
     }
 }

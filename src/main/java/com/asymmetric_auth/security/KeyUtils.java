@@ -17,6 +17,9 @@ import java.util.Base64;
 @Component
 public class KeyUtils {
 
+    private KeyUtils() {
+    }
+
     public static PublicKey loadPublicKey(String fileName) throws Exception {
         String key = readKeyFromResources(fileName);
         String publicKeyPEM = key.replace("-----BEGIN PUBLIC KEY-----", "")
