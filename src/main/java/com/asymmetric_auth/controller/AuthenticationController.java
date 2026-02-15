@@ -4,6 +4,7 @@ import com.asymmetric_auth.dto.request.AuthenticationRequest;
 import com.asymmetric_auth.dto.request.RefreshRequest;
 import com.asymmetric_auth.dto.request.RegistrationRequest;
 import com.asymmetric_auth.dto.response.AuthenticationResponse;
+import com.asymmetric_auth.dto.response.UserResponse;
 import com.asymmetric_auth.service.AuthenticationService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -31,12 +32,12 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Void> register(
+    public ResponseEntity<UserResponse> register(
             @Valid @RequestBody RegistrationRequest request
     ) {
-        this.authenticationService.register(request);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .build();
+        UserResponse userResponse =
+                this.authenticationService.register(request);
+        return new ResponseEntity<>(userResponse, HttpStatus.CREATED);
     }
 
     @PostMapping("/refresh")

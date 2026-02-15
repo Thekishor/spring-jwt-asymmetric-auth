@@ -2,15 +2,18 @@ package com.asymmetric_auth.controller;
 
 import com.asymmetric_auth.dto.request.ChangedPasswordRequest;
 import com.asymmetric_auth.dto.request.ProfileUpdateRequest;
+import com.asymmetric_auth.dto.response.UserResponse;
 import com.asymmetric_auth.entities.User;
 import com.asymmetric_auth.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -64,6 +67,12 @@ public class UserController {
             final Authentication authentication
     ) {
         this.userService.deleteAccount(getUserId(authentication));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<UserResponse>> getAllUsers() {
+        List<UserResponse> users = this.userService.getAllUsers();
+        return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
     private UUID getUserId(Authentication authentication) {

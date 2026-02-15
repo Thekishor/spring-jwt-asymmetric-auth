@@ -2,6 +2,7 @@ package com.asymmetric_auth.service;
 
 import com.asymmetric_auth.dto.request.ChangedPasswordRequest;
 import com.asymmetric_auth.dto.request.ProfileUpdateRequest;
+import com.asymmetric_auth.dto.response.UserResponse;
 import com.asymmetric_auth.entities.User;
 import com.asymmetric_auth.entities.UserMapper;
 import com.asymmetric_auth.exception.BusinessException;
@@ -12,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -80,5 +82,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteAccount(final UUID userId) {
         //
+    }
+
+    @Override
+    public List<UserResponse> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        return users.stream().map(userMapper::userResponse).toList();
     }
 }

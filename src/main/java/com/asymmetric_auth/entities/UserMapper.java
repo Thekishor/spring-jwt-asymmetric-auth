@@ -2,6 +2,7 @@ package com.asymmetric_auth.entities;
 
 import com.asymmetric_auth.dto.request.ProfileUpdateRequest;
 import com.asymmetric_auth.dto.request.RegistrationRequest;
+import com.asymmetric_auth.dto.response.UserResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +37,17 @@ public class UserMapper {
                 .credentialsExpired(false)
                 .emailVerified(true)
                 .phoneVerified(true)
+                .build();
+    }
+
+    public UserResponse userResponse(User user) {
+        return UserResponse
+                .builder()
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .email(user.getEmail())
+                .phoneNumber(user.getPhoneNumber())
+                .enabled(user.isEnabled())
                 .build();
     }
 }

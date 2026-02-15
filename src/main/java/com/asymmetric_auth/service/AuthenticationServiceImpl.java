@@ -4,6 +4,7 @@ import com.asymmetric_auth.dto.request.AuthenticationRequest;
 import com.asymmetric_auth.dto.request.RefreshRequest;
 import com.asymmetric_auth.dto.request.RegistrationRequest;
 import com.asymmetric_auth.dto.response.AuthenticationResponse;
+import com.asymmetric_auth.dto.response.UserResponse;
 import com.asymmetric_auth.entities.Role;
 import com.asymmetric_auth.entities.User;
 import com.asymmetric_auth.entities.UserMapper;
@@ -67,7 +68,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     @Transactional
-    public void register(RegistrationRequest request) {
+    public UserResponse register(RegistrationRequest request) {
         checkUserEmail(request.getEmail());
         checkUserPhoneNumber(request.getPhoneNumber());
         checkPasswords(request.getPassword(), request.getConfirmPassword());
@@ -89,6 +90,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         userRole.setUsers(users);
 
         this.roleRepository.save(userRole);
+        return userMapper.userResponse(user);
     }
 
     @Override
