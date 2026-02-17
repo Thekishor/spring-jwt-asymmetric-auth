@@ -81,12 +81,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteAccount(final UUID userId) {
-        //
+        User user = userRepository.findById(userId).orElseThrow(() ->
+                new BusinessException(ErrorCode.USER_NOT_FOUND));
+        userRepository.delete(user);
     }
 
     @Override
     public List<UserResponse> getAllUsers() {
         List<User> users = userRepository.findAll();
         return users.stream().map(userMapper::userResponse).toList();
+    }
+
+    @Override
+    public UserResponse getUserById(UUID userId) {
+        User user = userRepository.findById(userId).orElseThrow(() ->
+                new BusinessException(ErrorCode.USER_NOT_FOUND));
+        return userMapper.userResponse(user);
     }
 }

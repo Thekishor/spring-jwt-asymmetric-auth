@@ -75,6 +75,12 @@ public class UserController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
+    @GetMapping("/{userId}")
+    public ResponseEntity<UserResponse> findUserById(@PathVariable("userId") UUID userId) {
+        UserResponse userResponse = this.userService.getUserById(userId);
+        return new ResponseEntity<>(userResponse, HttpStatus.OK);
+    }
+
     private UUID getUserId(Authentication authentication) {
         return ((User) Objects.requireNonNull(authentication.getPrincipal())).getId();
     }

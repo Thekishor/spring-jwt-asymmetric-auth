@@ -20,4 +20,6 @@ public interface UserService {
     void deleteAccount(UUID userId);
 
     List<UserResponse> getAllUsers();
+
+    UserResponse getUserById(UUID userId);
 }
